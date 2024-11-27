@@ -3,6 +3,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.bidi.log.Log;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import static java.lang.Thread.sleep;
@@ -44,6 +45,8 @@ public class LoginTest {
         loginPage.enterPassword("secret_sauce");
         loginPage.clickOnLoginButton();
         assertEquals("https://www.saucedemo.com/inventory.html", driver.getCurrentUrl());
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        inventoryPage.inventoryListIsDisplayed();
     }
 
 
@@ -110,7 +113,25 @@ public class LoginTest {
     public void allElementsAreDisplayed(){
         //1. Open Login page
         //2. Verify that "Swag Labs" logo is displayed
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.logoIsDisplayed();
         //3. Check that login credentials section is displayed
+        loginPage.loginSectionIsDisplayed();
         //4. CHeck that password section is displayed
+        assertTrue(loginPage.passwordSectionIsDisplayed());
+    }
+
+    @Test
+    public void logout(){
+        //1. Login with valid credentials
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.successLogin("standard_user", "secret_sauce");
+        //2. Click on the burger menu button
+        BurgerMenu burgerMenu  = new BurgerMenu(driver);
+        burgerMenu.clickBurgerMenu();
+        //3. Click on the Logout button
+        burgerMenu.clickLogoutButton();
+        //4. Check that the user is redirected to the Login page
+        assertEquals("https://www.saucedemo.com/", driver.getCurrentUrl());
     }
 }
