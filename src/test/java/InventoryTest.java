@@ -6,22 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class InventoryTest {
-
-    ChromeDriver driver;
-
-    @BeforeEach
-    public void setup(){
-        System.setProperty("webdriver.chrome.driver",
-                "/Users/ergrevegvrg/Downloads/chromedriver-mac-x64-2/chromedriver");
-        driver = new ChromeDriver();
-        driver.get("https://www.saucedemo.com/");
-    }
-
-    @AfterEach
-    public void tearDown(){
-        driver.quit();
-    }
+public class InventoryTest extends BaseTest{
 
     @Test
     public void itemsTest(){
@@ -39,6 +24,7 @@ public class InventoryTest {
         //check that all item names are not empty
         assertTrue(inventoryPage.allItemNamesAreNotEmpty());
         //Check that all items names start with "Sauce Labs"
+        assertTrue(inventoryPage.allItemNamesContainsSauseLabs());
     }
 
 

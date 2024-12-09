@@ -10,22 +10,7 @@ import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LoginTest {
-
-    ChromeDriver driver;
-
-    @BeforeEach
-    public void setup(){
-        System.setProperty("webdriver.chrome.driver",
-                "/Users/ergrevegvrg/Downloads/chromedriver-mac-x64-2/chromedriver");
-        driver = new ChromeDriver();
-        driver.get("https://www.saucedemo.com/");
-    }
-
-    @AfterEach
-    public void tearDown(){
-        driver.quit();
-    }
+public class LoginTest extends BaseTest{
 
     @Test
     public void successLoginValidDataWithoutPO() throws InterruptedException {
